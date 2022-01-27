@@ -11,10 +11,10 @@ class CoursesController < ApplicationController
 	def new
 
 	end
-	
+
 	def create
-		if(Course.find_by(params[:name]))
-			@course = Course.find_by(params[:name])
+		if(Course.find_by(name:course_params[:name]))
+			@course = Course.find_by(name:course_params[:name])
 			add_tutor_to_exisiting_course
 		else 
 			@course = course_params
