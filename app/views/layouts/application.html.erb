@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Assignment</title>
+    <title>Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,8 +9,51 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body ng-app ="app" ng-controller="appController">
     <%= yield %>
   </body>
+  <script>
+      var app = angular.module("app",[]);
+      app.controller('appController',function($scope,$http){
+          $scope.createDummyCourse = function(){
+            $http.post('courses/new',
+              {course:
+                {name:"Physics",
+                 prerequisite: ["Mathematics"],
+                  tutors_attributes:[
+                      {
+                        first_name:"Abhsihek",
+                        last_name:"Anand",
+                        email:"abhishek13anand@gmail.com",
+                        mobile_number: "9955228177",
+                        email_confirmation:"abhishek13anand@gmail.com",
+                        highest_qualification:{
+                              degree:"B.tech",
+                              college:"NIT CALICUT"
+                          }
+                      },
+                      {first_name:"mrityunjay",
+                       last_name:"kumar",
+                       email:"mrityunjay@gmail.com",
+                       mobile_number: "9572229783",
+                       email_confirmation:"mrityunjay@gmail.com",
+                       highest_qualification:{
+                              degree:"B.tech",
+                              college:"NIT CALICUT"
+                          }
+                      }
+                   ]
+                }
+              }
+              ).then(function success(response){
+                
+            },
+            function error(response){
+              console.log(response);
+            });
+          }
+      });
+  </script>
 </html>
+
